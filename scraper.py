@@ -22,15 +22,21 @@ class PyScraper(scrapy.Spider):
       MINIFIGS_SELECTOR = './/dl[dt/text() = "Minifigs"]/dd[2]/a/text()'
       RRP_SELECTOR = './/dl[dt/text() = "RRP"]/dd[3]/text()'
       PPP_SELECTOR = './/dl[dt/text() = "PPP"]/dd[4]/text()'
-      IMAGE_SELECTOR = 'img ::attr(src)'
+      PKG_SELECTOR = './/dl[dt/text() = "PPP"]/dd[5]/text()'
+      AVAIL_SELECTOR = './/dl[dt/text() = "PPP"]/dd[6]/text()'
+      FSOLD_SELECTOR = './/dl[dt/text() = "PPP"]/dd[7]/text()'
       INST_SELECTOR = './/dl[dt/text() = "Instructions"]/dd[8]/a/text()'
       ADDIMG_SELECTOR = './/dl[dt/text() = "Additional images"]/dd[9]/a/text()'
+      IMAGE_SELECTOR = 'img ::attr(src)'
       yield {
         'name': brickset.css(NAME_SELECTOR).extract_first(),
         'pieces': brickset.xpath(PIECES_SELECTOR).extract_first(),
         'minifigs': brickset.xpath(MINIFIGS_SELECTOR).extract_first(),
         'rrp': brickset.xpath(RRP_SELECTOR).extract_first(),
         'ppp': brickset.xpath(PPP_SELECTOR).extract_first(),
+        'pkg': brickset.xpath(PKG_SELECTOR).extract_first(),
+        'avail': brickset.xpath(AVAIL_SELECTOR).extract_first(),
+        'fsold': brickset.xpath(FSOLD_SELECTOR).extract_first(),
         'inst': brickset.xpath(INST_SELECTOR).extract_first(),
         'addimg': brickset.xpath(ADDIMG_SELECTOR).extract_first(),
         'image': brickset.css(IMAGE_SELECTOR).extract_first(),
