@@ -10,10 +10,6 @@ class PyScraper(scrapy.Spider):
   name = 'brickset_pyscrapy'
   start_urls = ['https://brickset.com/sets/year-2016']
 
-  """selecting .set as css selector for response object. Grabs all the sets
-  on the page and loops over them to extract the data. Uses brickset object
-  to loop over each set using its own css method to locate set name and
-  display"""
   def parse(self, response):
     SET_SELECTOR = '.set'
     for brickset in response.css(SET_SELECTOR):
@@ -42,10 +38,6 @@ class PyScraper(scrapy.Spider):
         'image': brickset.css(IMAGE_SELECTOR).extract_first(),
       }
 
-    """taking into account that spider would crawl and extract data from
-    subsequent pages(if it exists) by adding a next_page response object which
-    would extract the required HTML portion and parse it using the parse method
-    defined above, extract data and search for the next page again"""
     NEXT_PAGE_SELECTOR = '.next a ::attr(href)'
     next_page = response.css(NEXT_PAGE_SELECTOR).extract_first()
     if next_page:
