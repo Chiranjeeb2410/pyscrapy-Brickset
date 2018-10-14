@@ -1,5 +1,7 @@
 import urllib.request
 from bs4 import BeautifulSoup
+import csv
+from datetime import datetime
 
 quote_page  = 'https://www.bloomberg.com/quote/SPX:IND'
 res_page = urllib.request.urlopen(quote_page)
@@ -23,4 +25,9 @@ print (change)
 
 quote_changeCent = soup.find('span', attrs={'id': 'quote_changePer', 'class': 'cr_num diff_percent'})
 changeCent = quote_changeCent.text.strip()
-print (change)
+print (changeCent)
+
+#export data to csv
+with open('index.csv', 'a') as csv_file:
+  writer = csv.writer(csv_file)
+  writer.writerow([name, price, change, changeCent, datetime.now()])
